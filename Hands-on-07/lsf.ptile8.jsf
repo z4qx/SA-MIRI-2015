@@ -1,0 +1,19 @@
+UB -J "SA-MIRI-extrae"
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -W 00:55
+#BSUB -x 
+#BSUB -R"span[ptile=8]"
+#BSUB -n 16
+
+module load extrae
+APP="mvmmpi"
+
+SIZE=8192
+ 
+mpirun  ./trace.sh ./$APP $SIZE  
+mv ./$APP.pcf ./$APP-$SIZE-$LSB_MAX_NUM_PROCESSORS.ptile8.pcf
+mv ./$APP.row ./$APP-$SIZE-$LSB_MAX_NUM_PROCESSORS.ptile8.row
+mv ./$APP.prv ./$APP-$SIZE-$LSB_MAX_NUM_PROCESSORS.ptile8.prv
+
+

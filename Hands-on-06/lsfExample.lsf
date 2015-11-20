@@ -1,0 +1,24 @@
+#!/bin/bash
+#BSUB -J MPI_MAT_VEC_MUL 
+#BSUB -n 64 
+#BSUB -W 00:55
+#BSUB -oo output_%J.out
+#BSUB -eo output_%J.err
+#BSUB -R"span[ptile=16]"
+#BSUB -x
+
+# set application and parameters
+echo $PWD
+module load extrae
+module list
+
+APP="mpi_mat_vect_mult"
+SIZE=4096
+NP=64
+
+mpirun -np $NP ./trace.sh ./$APP $SIZE > out-$APP-$SIZE-$NP
+
+mv ./$APP.pcf ./$APP-$SIZE-$NP.pcf
+mv ./$APP.row ./$APP-$SIZE-$NP.row
+mv ./$APP.prv ./$APP-$SIZE-$NP.prv
+
