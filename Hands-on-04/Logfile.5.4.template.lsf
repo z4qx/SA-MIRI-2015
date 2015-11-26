@@ -10,8 +10,7 @@ LOG=profile.log
 
 cont=0
 # Launch vmstat for infinity into logfile
-( while [ $cont -eq 0 ]; do top -n 1 -b -u $USER -H >> $LOG; vmstat >> $LOG ; do
-ne ) &
+( while [ $cont -eq 0 ]; do top -n 1 -b -u $USER -H >> $LOG; vmstat >> $LOG ; done ) &
 
 sleep 1
 echo "#####################################" >> $LOG
